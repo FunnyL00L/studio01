@@ -1,97 +1,138 @@
-import Image from "next/image";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { Waves, Film, CookingPot, Leaf } from "lucide-react";
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import { CheckCircle, XCircle, Waves, Film, CookingPot, Leaf, VenetianMask, Anchor, Footprints } from "lucide-react";
 
-const activities = [
-  {
-    id: 1,
-    title: "Dolphin Watching",
-    description: "Enjoy a calm boat tour to see dolphins in their natural habitat.",
-    icon: <Waves className="h-8 w-8 text-primary" />,
-    image: PlaceHolderImages.find((img) => img.id === "activity-1"),
+const activitiesByTrimester = {
+  trimester1: {
+    recommended: [
+      { name: "Jalan Santai di Dek", icon: <Footprints className="h-5 w-5 text-green-500" /> },
+      { name: "Kelas Yoga Prenatal", icon: <Leaf className="h-5 w-5 text-green-500" /> },
+      { name: "Menonton Film di Tepi Kolam", icon: <Film className="h-5 w-5 text-green-500" /> },
+    ],
+    notRecommended: [
+      { name: "Aktivitas berat atau berdampak tinggi", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+      { name: "Sauna atau Hot Tub", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    ],
   },
-  {
-    id: 2,
-    title: "Onboard Movie Nights",
-    description: "Relax with classic films under the stars on the main deck.",
-    icon: <Film className="h-8 w-8 text-primary" />,
-    image: PlaceHolderImages.find((img) => img.id === "activity-2"),
+  trimester2: {
+    recommended: [
+      { name: "Berenang di Kolam Renang", icon: <Waves className="h-5 w-5 text-green-500" /> },
+      { name: "Kelas Memasak Makanan Sehat", icon: <CookingPot className="h-5 w-5 text-green-500" /> },
+      { name: "Tur Kapal Melihat Lumba-lumba", icon: <Waves className="h-5 w-5 text-green-500" /> },
+    ],
+    notRecommended: [
+      { name: "Seluncuran air berkecepatan tinggi", icon: <VenetianMask className="h-5 w-5 text-destructive" /> },
+      { name: "Panjat tebing", icon: <Footprints className="h-5 w-5 text-destructive" /> },
+    ],
   },
-  {
-    id: 3,
-    title: "Maternity Cooking Class",
-    description: "Learn to prepare nutritious and delicious meals for you and your baby.",
-    icon: <CookingPot className="h-8 w-8 text-primary" />,
-    image: PlaceHolderImages.find((img) => img.id === "activity-3"),
+  trimester3: {
+    recommended: [
+      { name: "Perawatan Spa Prenatal", icon: <Leaf className="h-5 w-5 text-green-500" /> },
+      { name: "Sesi Fotografi Kehamilan", icon: <Film className="h-5 w-5 text-green-500" /> },
+      { name: "Menikmati musik live", icon: <Film className="h-5 w-5 text-green-500" /> },
+    ],
+    notRecommended: [
+      { name: "Perjalanan jauh dari kapal", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+      { name: "Scuba diving", icon: <Anchor className="h-5 w-5 text-destructive" /> },
+      { name: "Aktivitas yang membutuhkan keseimbangan tinggi", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    ],
   },
-  {
-    id: 4,
-    title: "Prenatal Spa Treatments",
-    description: "Indulge in spa treatments specifically designed for expectant mothers.",
-    icon: <Leaf className="h-8 w-8 text-primary" />,
-    image: PlaceHolderImages.find((img) => img.id === "activity-4"),
-  },
-];
+};
 
-export default function ActivityGallery() {
+export default function ActivityRecommendations() {
   return (
-    <section id="activities" className="w-full py-12 md:py-24 lg:py-32 bg-secondary/50">
+    <section
+      id="activities"
+      className="w-full py-12 md:py-24 lg:py-32 bg-secondary/50"
+    >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-accent/20 px-3 py-1 text-sm text-accent-foreground font-medium">
-              Activities
+              Rekomendasi Kegiatan
             </div>
             <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">
-              Enjoy Every Moment
+              Aktivitas Aman & Menyenangkan
             </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              We've curated a selection of safe and enjoyable activities for you
-              to make the most of your cruise.
+              Temukan kegiatan yang kami sarankan dan yang harus dihindari
+              berdasarkan trimester kehamilan Anda untuk memastikan perjalanan
+              yang nyaman.
             </p>
           </div>
         </div>
-        <div className="my-8 flex justify-center gap-2">
-          <Button>All</Button>
-          <Button variant="outline">Relaxation</Button>
-          <Button variant="outline">Entertainment</Button>
-          <Button variant="outline">Educational</Button>
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {activities.map((activity) => (
-            <Card key={activity.id} className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1">
-              {activity.image && (
-                <CardHeader className="p-0">
-                  <div className="aspect-[4/3] relative">
-                    <Image
-                      src={activity.image.imageUrl}
-                      alt={activity.title}
-                      fill
-                      className="object-cover"
-                      data-ai-hint={activity.image.imageHint}
-                    />
-                  </div>
-                </CardHeader>
-              )}
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                    {activity.icon}
-                  <CardTitle className="font-headline text-xl">{activity.title}</CardTitle>
+
+        <Tabs defaultValue="trimester1" className="mt-12">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="trimester1">Trimester 1 (1-13 Minggu)</TabsTrigger>
+            <TabsTrigger value="trimester2">Trimester 2 (14-26 Minggu)</TabsTrigger>
+            <TabsTrigger value="trimester3">Trimester 3 (27+ Minggu)</TabsTrigger>
+          </TabsList>
+          {Object.entries(activitiesByTrimester).map(([key, data]) => (
+            <TabsContent key={key} value={key}>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mt-8">
+                <div>
+                  <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
+                    <CheckCircle className="h-7 w-7 text-green-500" />
+                    Direkomendasikan
+                  </h3>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Aktivitas</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.recommended.map((activity) => (
+                        <TableRow key={activity.name}>
+                          <TableCell className="flex items-center gap-3">
+                            {activity.icon}
+                            <span>{activity.name}</span>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </div>
-                <p className="mt-2 text-muted-foreground">
-                  {activity.description}
-                </p>
-              </CardContent>
-            </Card>
+                <div>
+                  <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
+                    <XCircle className="h-7 w-7 text-destructive" />
+                    Tidak Direkomendasikan
+                  </h3>
+                   <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Aktivitas</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.notRecommended.map((activity) => (
+                        <TableRow key={activity.name}>
+                          <TableCell className="flex items-center gap-3">
+                            {activity.icon}
+                            <span>{activity.name}</span>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
