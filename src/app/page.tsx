@@ -1,5 +1,6 @@
 import Header from "@/components/layout/header";
 import Hero from "@/components/sections/hero";
+import GestationalChecker from "@/components/sections/gestational-checker";
 import EmergencySop from "@/components/sections/emergency-sop";
 import SafetyGuides from "@/components/sections/safety-guides";
 import HealthTips from "@/components/sections/health-tips";
@@ -14,6 +15,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <GestationalChecker />
         <EmergencySop />
         <SafetyGuides />
         <HealthTips />
