@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/sheet";
 
 const navLinks = [
-  { href: "#safety", label: "Safety Guides" },
-  { href: "#health", label: "Health Tips" },
-  { href: "#activities", label: "Activities" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "#emergency-sop", label: "SOP Darurat" },
+  { href: "#safety", label: "Panduan Keselamatan" },
+  { href: "#health", label: "Tips Kesehatan" },
+  { href: "#activities", label: "Aktivitas" },
+  { href: "#testimonials", label: "Testimoni" },
   { href: "#faq", label: "FAQs" },
 ];
 
@@ -46,7 +47,7 @@ export default function Header() {
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Open navigation menu</span>
+                <span className="sr-only">Buka menu navigasi</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">

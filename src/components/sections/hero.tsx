@@ -8,7 +8,7 @@ export default function Hero() {
   const heroImage = PlaceHolderImages.find((img) => img.id === "hero-background");
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center text-center">
+    <section className="relative w-full h-[70vh] md:h-[70vh] flex items-center justify-center text-center">
       {heroImage && (
         <Image
           src={heroImage.imageUrl}
@@ -25,12 +25,12 @@ export default function Hero() {
             CruiseCare
           </h1>
           <p className="mt-4 text-lg md:text-xl lg:text-2xl text-primary-foreground/90">
-            Your Ultimate Guide to Safe & Serene Pregnancy Travel
+            Panduan Utama Anda untuk Perjalanan Kehamilan yang Aman & Tenang
           </p>
           <div className="mt-8 max-w-lg mx-auto flex gap-2">
             <Input
               type="search"
-              placeholder="Search for articles, tips, or questions..."
+              placeholder="Cari artikel, tips, atau pertanyaan..."
               className="flex-1 text-base text-foreground"
             />
             <Button type="submit" size="icon" aria-label="Search">

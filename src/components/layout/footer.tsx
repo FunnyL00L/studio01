@@ -1,13 +1,5 @@
 import Link from "next/link";
 
-const navLinks = [
-  { href: "#safety", label: "Safety Guides" },
-  { href: "#health", label: "Health Tips" },
-  { href: "#activities", label: "Activities" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#faq", label: "FAQs" },
-];
-
 export default function Footer() {
   return (
     <footer className="bg-secondary/50">
@@ -18,7 +10,7 @@ export default function Footer() {
               CruiseCare
             </Link>
             <p className="mt-1 text-sm text-muted-foreground">
-              Your guide to a safe and happy cruise.
+              Panduan Anda untuk pelayaran yang aman dan bahagia.
             </p>
           </div>
           <p className="text-sm text-muted-foreground">

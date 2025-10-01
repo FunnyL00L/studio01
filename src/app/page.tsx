@@ -1,5 +1,6 @@
 import Header from "@/components/layout/header";
 import Hero from "@/components/sections/hero";
+import EmergencySop from "@/components/sections/emergency-sop";
 import SafetyGuides from "@/components/sections/safety-guides";
 import HealthTips from "@/components/sections/health-tips";
 import ActivityGallery from "@/components/sections/activity-gallery";
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <EmergencySop />
         <SafetyGuides />
         <HealthTips />
         <ActivityGallery />
