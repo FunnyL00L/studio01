@@ -18,7 +18,7 @@ export default function Home() {
         <GestationalChecker />
         <EmergencySop />
         <SafetyGuides />
-        <HealthTips />
+        {/* <HealthTips /> */}
         <ActivityGallery />
         <Testimonials />
         <Faq />

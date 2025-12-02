@@ -6,49 +6,34 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
+import { CheckCircle, XCircle } from "lucide-react";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { CheckCircle, XCircle, Waves, Film, CookingPot, Leaf, VenetianMask, Anchor, Footprints } from "lucide-react";
 
-const activitiesByTrimester = {
-  trimester1: {
-    recommended: [
-      { name: "Jalan Santai di Dek", icon: <Footprints className="h-5 w-5 text-green-500" /> },
-      { name: "Kelas Yoga Prenatal", icon: <Leaf className="h-5 w-5 text-green-500" /> },
-      { name: "Menonton Film di Tepi Kolam", icon: <Film className="h-5 w-5 text-green-500" /> },
-    ],
-    notRecommended: [
-      { name: "Aktivitas berat atau berdampak tinggi", icon: <XCircle className="h-5 w-5 text-destructive" /> },
-      { name: "Sauna atau Hot Tub", icon: <XCircle className="h-5 w-5 text-destructive" /> },
-    ],
-  },
-  trimester2: {
-    recommended: [
-      { name: "Berenang di Kolam Renang", icon: <Waves className="h-5 w-5 text-green-500" /> },
-      { name: "Kelas Memasak Makanan Sehat", icon: <CookingPot className="h-5 w-5 text-green-500" /> },
-      { name: "Tur Kapal Melihat Lumba-lumba", icon: <Waves className="h-5 w-5 text-green-500" /> },
-    ],
-    notRecommended: [
-      { name: "Seluncuran air berkecepatan tinggi", icon: <VenetianMask className="h-5 w-5 text-destructive" /> },
-      { name: "Panjat tebing", icon: <Footprints className="h-5 w-5 text-destructive" /> },
-    ],
-  },
-  trimester3: {
-    recommended: [
-      { name: "Perawatan Spa Prenatal", icon: <Leaf className="h-5 w-5 text-green-500" /> },
-      { name: "Sesi Fotografi Kehamilan", icon: <Film className="h-5 w-5 text-green-500" /> },
-      { name: "Menikmati musik live", icon: <Film className="h-5 w-5 text-green-500" /> },
-    ],
-    notRecommended: [
-      { name: "Perjalanan jauh dari kapal", icon: <XCircle className="h-5 w-5 text-destructive" /> },
-      { name: "Scuba diving", icon: <Anchor className="h-5 w-5 text-destructive" /> },
-      { name: "Aktivitas yang membutuhkan keseimbangan tinggi", icon: <XCircle className="h-5 w-5 text-destructive" /> },
-    ],
-  },
+// Daftar aktivitas yang aman dan tidak aman untuk ibu hamil
+const activities = {
+  recommended: [
+    // Aktivitas Aman
+    { name: "Naik kapal dengan laut tenang", icon: <CheckCircle className="h-5 w-5 text-green-500" /> },
+    { name: "Berenang ringan di laut atau pantai dengan ombak tenang", icon: <CheckCircle className="h-5 w-5 text-green-500" /> },
+    { name: "Snorkeling ringan di perairan dangkal dan tenang (hanya trimester 2)", icon: <CheckCircle className="h-5 w-5 text-green-500" /> },
+    { name: "Melihat pemandangan dari kapal tanpa aktivitas air", icon: <CheckCircle className="h-5 w-5 text-green-500" /> },
+    { name: "Menikmati sunset dari atas kapal dengan duduk nyaman", icon: <CheckCircle className="h-5 w-5 text-green-500" /> },
+  ],
+  notRecommended: [
+    // Aktivitas Dilarang
+    { name: "Diving/scuba diving (perubahan tekanan berbahaya untuk janin)", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Snorkeling di area dengan arus kuat", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Jet ski, banana boat, atau watersport ekstrem", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Berenang di laut dengan ombak tinggi", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Melompat dari kapal atau dari ketinggian", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Aktivitas yang melibatkan benturan atau getaran kuat", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+    { name: "Berjemur terlalu lama di bawah terik matahari", icon: <XCircle className="h-5 w-5 text-destructive" /> },
+  ],
 };
 
 export default function ActivityRecommendations() {
@@ -67,71 +52,70 @@ export default function ActivityRecommendations() {
               Aktivitas Aman & Menyenangkan
             </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Temukan kegiatan yang kami sarankan dan yang harus dihindari
-              berdasarkan trimester kehamilan Anda untuk memastikan perjalanan
-              yang nyaman.
+              Temukan semua kegiatan yang kami sarankan dan yang harus dihindari untuk memastikan perjalanan yang nyaman.
             </p>
           </div>
         </div>
 
-        <Tabs defaultValue="trimester1" className="mt-12">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="trimester1">Trimester 1 (1-13 Minggu)</TabsTrigger>
-            <TabsTrigger value="trimester2">Trimester 2 (14-26 Minggu)</TabsTrigger>
-            <TabsTrigger value="trimester3">Trimester 3 (27+ Minggu)</TabsTrigger>
+        <Tabs defaultValue="recommended" className="mt-12">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="recommended">Aktivitas Aman</TabsTrigger>
+            <TabsTrigger value="notRecommended">Aktivitas Dilarang</TabsTrigger>
           </TabsList>
-          {Object.entries(activitiesByTrimester).map(([key, data]) => (
-            <TabsContent key={key} value={key}>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 mt-8">
-                <div>
-                  <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
-                    <CheckCircle className="h-7 w-7 text-green-500" />
-                    Direkomendasikan
-                  </h3>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Aktivitas</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {data.recommended.map((activity) => (
-                        <TableRow key={activity.name}>
-                          <TableCell className="flex items-center gap-3">
-                            {activity.icon}
-                            <span>{activity.name}</span>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
-                    <XCircle className="h-7 w-7 text-destructive" />
-                    Tidak Direkomendasikan
-                  </h3>
-                   <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Aktivitas</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {data.notRecommended.map((activity) => (
-                        <TableRow key={activity.name}>
-                          <TableCell className="flex items-center gap-3">
-                            {activity.icon}
-                            <span>{activity.name}</span>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </div>
-            </TabsContent>
-          ))}
+
+          {/* Recommended Activities */}
+          <TabsContent value="recommended">
+            <div className="grid grid-cols-1 gap-8 mt-8">
+              <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
+                <CheckCircle className="h-7 w-7 text-green-500" />
+                Direkomendasikan
+              </h3>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Aktivitas</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {activities.recommended.map((activity) => (
+                    <TableRow key={activity.name}>
+                      <TableCell className="flex items-center gap-3">
+                        {activity.icon}
+                        <span>{activity.name}</span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
+
+          {/* Not Recommended Activities */}
+          <TabsContent value="notRecommended">
+            <div className="grid grid-cols-1 gap-8 mt-8">
+              <h3 className="text-2xl font-bold font-headline mb-4 flex items-center gap-2">
+                <XCircle className="h-7 w-7 text-destructive" />
+                Tidak Direkomendasikan
+              </h3>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Aktivitas</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {activities.notRecommended.map((activity) => (
+                    <TableRow key={activity.name}>
+                      <TableCell className="flex items-center gap-3">
+                        {activity.icon}
+                        <span>{activity.name}</span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </section>
